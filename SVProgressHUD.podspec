@@ -16,4 +16,10 @@ Pod::Spec.new do |s|
 
   s.default_subspec = 'Core'
 
+  s.subspec 'Core' do |core|
+    core.source_files = 'SVProgressHUD/*.{h,m}'
+    core.resources = ['SVProgressHUD/SVProgressHUD.bundle']
+    core.resource_bundles = {'SVProgressHUD-Privacy' => ['SVProgressHUD/PrivacyInfo.xcprivacy']}
+  end
+
 end
