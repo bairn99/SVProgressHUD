@@ -16,5 +16,4 @@ Pod::Spec.new do |s|
 
   s.default_subspec = 'Core'
 
-  s.source_files = '*.{h,m}'
 end
