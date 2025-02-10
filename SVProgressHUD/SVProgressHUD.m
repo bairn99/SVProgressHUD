@@ -79,6 +79,9 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 #if !defined(SV_APP_EXTENSIONS)
 + (UIWindow *)mainWindow {
     if (@available(iOS 13.0, *)) {
+        if ([[[UIApplication sharedApplication] delegate] window] != nil) {
+                return [[[UIApplication sharedApplication] delegate] window];
+            }
         for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes) {
             if (windowScene.activationState == UISceneActivationStateForegroundActive) {
                 return windowScene.windows.firstObject;
