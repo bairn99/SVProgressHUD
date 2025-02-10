@@ -613,13 +613,22 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 #if !defined(SV_APP_EXTENSIONS) && TARGET_OS_IOS
     self.frame =  [SVProgressHUD mainWindow].bounds;
     UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
+    if (self.frame.size.width <= 0) {
+        self.frame = [UIScreen mainScreen].bounds;
+    }
 #elif !defined(SV_APP_EXTENSIONS) && !TARGET_OS_IOS
     self.frame = [SVProgressHUD mainWindow].bounds;
+    if (self.frame.size.width <= 0) {
+        self.frame = [UIScreen mainScreen].bounds;
+    }
 #else
     if (self.viewForExtension) {
         self.frame = self.viewForExtension.frame;
     } else {
         self.frame = UIScreen.mainScreen.bounds;
+    }
+    if (self.frame.size.width <= 0) {
+        self.frame = [UIScreen mainScreen].bounds;
     }
 #if TARGET_OS_IOS
     UIInterfaceOrientation orientation = CGRectGetWidth(self.frame) > CGRectGetHeight(self.frame) ? UIInterfaceOrientationLandscapeLeft : UIInterfaceOrientationPortrait;
@@ -1190,6 +1199,9 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     // Update frame
 #if !defined(SV_APP_EXTENSIONS)
     _controlView.frame = [SVProgressHUD mainWindow].bounds;
+    if (_controlView.frame.size.width <= 0) {
+        _controlView.frame = [UIScreen mainScreen].bounds;
+    }
 #else
     _controlView.frame = [UIScreen mainScreen].bounds;
 #endif
